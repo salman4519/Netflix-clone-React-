@@ -2,6 +2,7 @@
 import { initializeApp  } from "firebase/app";
 import { createUserWithEmailAndPassword, getAuth, signInWithEmailAndPassword, signOut } from "firebase/auth";
 import { addDoc, collection, getFirestore } from "firebase/firestore";
+import { toast } from "react-toastify";
 
 
 // Your web app's Firebase configuration
@@ -31,16 +32,17 @@ const signup = async(name,email,password) =>{
        })
     } catch (error) {
         console.log(error);
-        alert(error);
+        toast.error(error.code.split('/'[0].split("-").join(" ")))
     }
 }
 
 const login = async(email,password) =>{
     try {
         await signInWithEmailAndPassword(auth,email,password)
+        return true
     } catch (error) {
         console.log(error)
-        alert(error)
+        return false
     }
 }
 
